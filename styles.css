@@ -108,7 +108,7 @@ button.night{
 }
 
 button.night:hover {
-    background-color: white; /* Added hover style for night mode */
+    background-color: white;
     color: rgb(44, 111, 249);
 }
 
@@ -166,19 +166,6 @@ img{
     background-size: 12px;
     cursor: pointer;
     transition: 0.45s;
-    /* background-color: white;
-    border: none;
-    color: rgb(44, 111, 249);
-    padding: 4px 8px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
-    margin: 0px 0px;
-    transition-duration: 0.2s;
-    cursor: pointer;
-    border: 1px solid rgb(44, 111, 249);
-    border-radius: 25px; */
 }
 
 #dark-change.active:before{
@@ -195,11 +182,6 @@ body.night{
     background-color: rgb(0, 0, 0);
     color: white;
 }
-
-/* select{
-    background-color: white;
-    color: black;
-} */
 
 .night select{
     background-color: black;

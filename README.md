@@ -43,10 +43,10 @@ As we click on the toggle, the dark mode will look like this:
 ><img width="1680" alt="Screenshot 2024-04-22 at 12 03 28 AM" src="https://github.com/imfeniljikadara/Wave-Modulation-Simulator/assets/146850675/835601cc-f3c2-4bd1-a47f-58847f24684d">
 
 As we click on "Click to contact me!" Button, it will through contact details of me:
-><img width="1680" alt="Screenshot 2024-04-22 at 12 06 11 AM" src="https://github.com/imfeniljikadara/Wave-Modulation-Simulator/assets/146850675/3bf18f3a-493e-48e4-b36f-05f5120e763a">
+><img width="1680" alt="Screenshot 2024-04-22 at 12 14 33 AM" src="https://github.com/imfeniljikadara/Wave-Modulation-Simulator/assets/146850675/122ed24d-a7df-40df-aa9b-2036ad01f0f5">
 
 Now, after selecting modulation type and putting all the data will get the modulated waves like this:
-><img width="1680" alt="Screenshot 2024-04-22 at 12 14 33 AM" src="https://github.com/imfeniljikadara/Wave-Modulation-Simulator/assets/146850675/122ed24d-a7df-40df-aa9b-2036ad01f0f5">
+><img width="1680" alt="Screenshot 2024-04-22 at 12 06 11 AM" src="https://github.com/imfeniljikadara/Wave-Modulation-Simulator/assets/146850675/3bf18f3a-493e-48e4-b36f-05f5120e763a">
 
 The dark mode view:
 ><img width="1680" alt="Screenshot 2024-04-22 at 12 21 02 AM" src="https://github.com/imfeniljikadara/Wave-Modulation-Simulator/assets/146850675/01fdcd72-ba20-4b27-b229-5d0d2848cc1c">

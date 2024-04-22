@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title>Wave Modulation Simulator</title>
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+
+</head>
+
+<body>
+
+<header>
+  <label id="dark-change"></label>
+  <nav>
+    <a class="1" style="text-align:left;">
+    <img id="refreshBtn" src="favicon.png" alt="Profile">
+    <a style="text-align: center;"></a>
+    <span>
+      <a style="float:right;" id="demo">Click to contact me!</a>
+    </span>
+  </nav>
+</header>
+
+<hr>
+
+<h1>Wave Modulation Simulator</h1>
+<hr>
+
+  <p id="ModulationFrequency">
+    <label for="modulationType">Modulation Type: </label>
+      <select id="modulationType" onchange="handleModulationTypeChange()">
+        <option value="am"> AM (Amplitude Modulation) </option>
+        <option value="fm"> FM (Frequency Modulation) </option>
+        <option value="pm"> PM (Phase Modulation) </option>
+        <option value="ask"> ASK (Amplitude Shift Keying) </option>
+        <option value="fsk"> FSK (Frequency Shift Keying) </option>
+        <option value="psk"> PSK (Phase Shift Keying)</option>
+      </select>
+
+    <p id="CarrierFrequency">
+    <label for="carrierFrequency">Carrier Frequency (Hz): </label>
+    <input id="carrierFrequency" min="1">
+    </p>
+
+    <div id="amInputs" style="display: none;">
+      <p>
+      <label for="messageFrequency">Message Frequency (Hz): </label>
+      <input id="messageFrequency" min="1">
+      </p>
+      <p>
+      <label for="carrierAmplitude">Carrier Amplitude: </label>
+      <input id="carrierAmplitude" min="1">
+      </p>
+      <p>
+      <label for="messageAmplitude">Message Amplitude: </label>
+      <input id="messageAmplitude" min="1">
+      </p>
+      <p>
+      <label for="samplingTime">Sampling Time (Seconds): </label>
+      <input id="samplingTime" min="0.01" step="0.01">
+      </p>
+    </div>
+  
+    <div id="fmInputs" style="display: none;">
+      <p>
+      <label for="fmMessageFrequency">Message Frequency (Hz): </label>
+      <input id="fmMessageFrequency" min="1">
+      </p>
+      <p>
+      <label for="fmCarrierAmplitude">Carrier Amplitude: </label>
+      <input id="fmCarrierAmplitude" min="1">
+      </p>
+      <p>
+      <label for="deviation">Deviation (Hz): </label>
+      <input id="deviation" min="1">
+      </p>
+      <p>
+      <label for="fmSamplingTime">Sampling Time (Seconds): </label>
+      <input id="fmSamplingTime" min="0.01" step="0.01">
+      </p>
+    </div>
+  
+    <div id="pmInputs" style="display: none;">
+      <p>
+      <label for="pmMessageFrequency">Message Frequency (Hz): </label>
+      <input id="pmMessageFrequency" min="1">
+      </p>
+      <p>
+      <label for="pmCarrierAmplitude">Carrier Amplitude: </label>
+      <input id="pmCarrierAmplitude" min="1">
+      </p>
+      <p>
+      <label for="pmDeviation">Deviation (Degrees): </label>
+      <input id="pmDeviation" min="1">
+      </p>
+      <p>
+      <label for="pmSamplingTime">Sampling Time (Seconds): </label>
+      <input id="pmSamplingTime" min="0.01" step="0.01">
+      </p>
+    </div>
+  
+    <div id="askInputs" style="display: none;">
+      <p>
+      <label for="askBitRate">Bit Rate (Bits/s): </label>
+      <input id="askBitRate" min="1">
+      </p>
+      <p>
+      <label for="askAmplitude">Amplitude: </label>
+      <input id="askAmplitude" min="1">
+      </p>
+    </div>
+  
+    <div id="fskInputs" style="display: none;">
+      <p>
+      <label for="fskBitRate">Bit Rate (Bits/s): </label>
+      <input id="fskBitRate" min="1">
+      </p>
+      <p>
+      <label for="fskFrequency1">Frequency 1 (Hz): </label>
+      <input id="fskFrequency1" min="1">
+      </p>
+      <p>
+      <label for="fskFrequency2">Frequency 2 (Hz): </label>
+      <input id="fskFrequency2" min="1">
+      </p>
+    </div>
+  
+    <div id="pskInputs" style="display: none;">
+      <p>
+      <label for="pskBitRate">Bit Rate (Bits/s): </label>
+      <input id="pskBitRate" min="1">
+      </p>
+      <p>
+      <label for="pskPhase">Phase (Degrees) : </label>
+      <input id="pskPhase" min="0" max="360">
+      </p>
+    </div>
+
+    <p>
+    <button id="myButton"onclick="startModulation()"> Start</button>
+    </p>
+
+    <hr>
+
+    <p>
+      <canvas id="canvas" width="800" height="300"></canvas>
+    </p>
+
+  <script>
+
+    document.getElementById("refreshBtn").onclick = function(){
+      location.reload();
+    };
+
+    var content = document.getElementsByTagName('body')[0];
+    var darkMode = document.getElementById('dark-change');
+    darkMode.addEventListener('click', function(){
+      darkMode.classList.toggle('active');
+      content.classList.toggle('night');
+    })
+
+    document.getElementById("demo").onclick = function() {
+      var currentText = this.innerHTML;
+      if (currentText === "Click to contact me!"){
+        this.innerHTML = "Github, LinkedIn, Twitter, Instagram @imfeniljikadara";
+      } 
+      else{
+        this.innerHTML = "Click to contact me!";
+      }
+    };
+
+
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    function startModulation() {
+      const carrierFrequency = parseFloat(document.getElementById('carrierFrequency').value);
+      const modulationType = document.getElementById('modulationType').value;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const wave = generateModulatedWave(carrierFrequency, modulationType);
+      plotWave(wave);
+    }
+    
+    function generateModulatedWave(carrierFrequency, modulationType){
+      const wave = [];
+        if (modulationType === 'am'){
+          const messageFrequency = parseFloat(document.getElementById('messageFrequency').value);
+          const carrierAmplitude = parseFloat(document.getElementById('carrierAmplitude').value);
+          const messageAmplitude = parseFloat(document.getElementById('messageAmplitude').value);
+          const samplingTime = parseFloat(document.getElementById('samplingTime').value);
+          for(let t = 0; t < canvas.width; t++){
+            const time = t / canvas.width;
+            const messageWave = messageAmplitude * Math.cos(2 * Math.PI * messageFrequency * time);
+            const carrierWave = carrierAmplitude * Math.cos(2 * Math.PI * carrierFrequency * time);
+            const modulatedAmplitude = (1 + messageWave / carrierAmplitude) * carrierWave;
+            wave.push(modulatedAmplitude);
+          }
+        }
+        else if (modulationType === 'fm'){
+          const messageFrequency = parseFloat(document.getElementById('fmMessageFrequency').value);
+          const carrierAmplitude = parseFloat(document.getElementById('fmCarrierAmplitude').value);
+          const deviation = parseFloat(document.getElementById('deviation').value);
+          const samplingTime = parseFloat(document.getElementById('fmSamplingTime').value);
+          for(let t = 0; t < canvas.width; t++){
+            const time = t / canvas.width;
+            const beta = deviation;
+            const modulatedFrequency = carrierAmplitude * Math.cos((2 * Math.PI * carrierFrequency * time) + (beta * Math.sin(2 * Math.PI * messageFrequency * time))); 
+            wave.push(modulatedFrequency);
+          }
+        } 
+        else if (modulationType === 'pm'){
+          const messageFrequency = parseFloat(document.getElementById('pmMessageFrequency').value);
+          const carrierAmplitude = parseFloat(document.getElementById('pmCarrierAmplitude').value);
+          const deviation = parseFloat(document.getElementById('pmDeviation').value);
+          const samplingTime = parseFloat(document.getElementById('pmSamplingTime').value);
+          for(let t = 0; t < canvas.width; t++){
+            const time = t / canvas.width;
+            const modulatedPhase = carrierAmplitude * Math.cos((2 * Math.PI * carrierFrequency * time) + (deviation * Math.cos(2 * Math.PI * messageFrequency * time)));
+            wave.push(modulatedPhase);
+          }
+        } 
+
+        else if (modulationType === 'ask'){
+          const bitRate = parseFloat(document.getElementById('askBitRate').value);
+          const carrierFrequency = parseFloat(document.getElementById('carrierFrequency').value);
+          const amplitude = parseFloat(document.getElementById('askAmplitude').value);
+          const bitDuration = 1 / bitRate;
+          let currentValue = 0;
+          for (let t = 0; t < canvas.width; t++){
+            const time = t / canvas.width;
+            const bitIndex = Math.floor(time / bitDuration);
+            const bitValue = (bitIndex % 2 === 0) ? 0 : 1;
+            currentValue = bitValue * amplitude;
+            const modulatedAmplitude = currentValue * Math.cos(2 * Math.PI * carrierFrequency * time);
+            wave.push(modulatedAmplitude);
+          }
+        } 
+        else if (modulationType === 'fsk'){
+          const bitRate = parseFloat(document.getElementById('fskBitRate').value);
+          const frequency1 = parseFloat(document.getElementById('fskFrequency1').value);
+          const frequency2 = parseFloat(document.getElementById('fskFrequency2').value);
+          const bitDuration = 1 / bitRate;
+          let currentValue = 0;
+          for (let t = 0; t < canvas.width; t++){
+            const time = t / canvas.width;
+            const bitIndex = Math.floor(time / bitDuration);
+            const bitValue = (bitIndex % 2 === 0) ? 0 : 1;
+            currentValue = (bitValue === 0) ? frequency1 : frequency2;
+            const modulatedFrequency = Math.cos(2 * Math.PI * currentValue * time);
+            wave.push(modulatedFrequency);
+          }
+        }
+        else if (modulationType === 'psk'){
+          const bitRate = parseFloat(document.getElementById('pskBitRate').value);
+          const carrierFrequency = parseFloat(document.getElementById('carrierFrequency').value);
+          const phase = parseFloat(document.getElementById('pskPhase').value);
+          const bitDuration = 1 / bitRate;
+          let currentValue = 0;
+          for (let t = 0; t < canvas.width; t++){
+            const time = t / canvas.width;
+            const bitIndex = Math.floor(time / bitDuration);
+            const bitValue = (bitIndex % 2 === 0) ? 0 : 1;
+            currentValue = (bitValue === 0) ? phase : (phase + 180) % 360;
+            const modulatedPhase = Math.cos(2 * Math.PI * carrierFrequency * time + (currentValue * Math.PI / 180));
+            wave.push(modulatedPhase);
+          }
+        }
+        return wave;
+      }
+    
+    function plotWave(wave){
+      const padding = 10;
+      const canvasHeight = canvas.height;
+      const canvasWidth = canvas.width;
+      const height = canvasHeight - (padding * 2);
+      const centerY = canvasHeight / 2;
+      const amplitude = Math.max.apply(null, wave);
+      const scaleFactor = height / (amplitude * 2);
+      const waveHeight = amplitude * scaleFactor * 2;
+
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+      ctx.imageSmoothingEnabled = false;
+      ctx.beginPath();
+      ctx.moveTo(padding, centerY - wave[0] * scaleFactor);
+
+      for (let t = 0; t < canvasWidth - (padding * 2); t++){
+        const value = wave[t];
+        const x = t + padding;
+        const y = centerY - (value * scaleFactor);
+        ctx.lineTo(x, y);
+      }
+      5
+      ctx.lineTo(canvasWidth - padding, centerY - wave[canvasWidth - (padding * 2)] * scaleFactor);
+      ctx.strokeStyle = 'rgb(44, 111, 249)';
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+    }
+
+    function handleModulationTypeChange(){
+      const modulationType = document.getElementById('modulationType').value;
+      document.getElementById('amInputs').style.display = 'none';
+      document.getElementById('fmInputs').style.display = 'none';
+      document.getElementById('pmInputs').style.display = 'none';
+      document.getElementById('askInputs').style.display = 'none';
+      document.getElementById('fskInputs').style.display = 'none';
+      document.getElementById('pskInputs').style.display = 'none';
+      if (modulationType === 'am'){
+        document.getElementById('amInputs').style.display = 'block';
+      }
+      else if (modulationType === 'fm'){
+        document.getElementById('fmInputs').style.display = 'block';
+      }
+      else if (modulationType === 'pm'){
+        document.getElementById('pmInputs').style.display = 'block';
+      }
+      else if (modulationType === 'ask'){
+        document.getElementById('askInputs').style.display = 'block';
+      }
+      else if (modulationType === 'fsk'){
+        document.getElementById('fskInputs').style.display = 'block';
+      }
+      else if (modulationType === 'psk'){
+        document.getElementById('pskInputs').style.display = 'block';
+      }
+    }
+  
+  </script>
+
+</body>
+</html>

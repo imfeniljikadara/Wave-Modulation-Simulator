@@ -2,7 +2,7 @@
 
 **Description**
 
-Wave Modulation Simulator is a web-based application designed to simulate various types of wave modulation techniques. The project allows users to visualize and understand concepts like Amplitude Modulation (AM), Frequency Modulation (FM), Phase Modulation (PM), Amplitude Shift Keying (ASK), Frequency Shift Keying (FSK), and Phase Shift Keying (PSK) in a simple and interactive manner.
+Wave Modulation Simulator is a web based application designed to simulate various types of wave modulation techniques. The project allows users to visualize and understand concepts like Amplitude Modulation (AM), Frequency Modulation (FM), Phase Modulation (PM), Amplitude Shift Keying (ASK), Frequency Shift Keying (FSK), and Phase Shift Keying (PSK) in a simple and interactive manner.
 
 **How to Use**
 

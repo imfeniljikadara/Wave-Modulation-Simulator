@@ -37,16 +37,16 @@ Wave Modulation Simulator is a web based application designed to simulate variou
 **Here are some of clicks:**
 
 The overall website will appear like this:
-> ![Image](https://github.com/users/imfeniljikadara/projects/1/assets/146850675/c9e451d6-3abc-4291-aca9-30fc6b96da6d)
+><img width="1680" alt="Screenshot 2024-04-22 at 12 03 17 AM" src="https://github.com/imfeniljikadara/Wave-Modulation-Simulator/assets/146850675/0c4f2395-757d-4303-9c55-26cb9af35a6e">
 
 As we click on the toggle, the dark mode will look like this:
->![Image](https://github.com/users/imfeniljikadara/projects/1/assets/146850675/2f060b9d-ce79-4437-b97b-8f860843bf74)
+><img width="1680" alt="Screenshot 2024-04-22 at 12 03 28 AM" src="https://github.com/imfeniljikadara/Wave-Modulation-Simulator/assets/146850675/835601cc-f3c2-4bd1-a47f-58847f24684d">
 
 As we click on "Click to contact me!" Button, it will through contact details of me:
->![Image](https://github.com/users/imfeniljikadara/projects/1/assets/146850675/c78b8cc5-987f-46ea-89d4-04c48dcfa4aa)
+><img width="1680" alt="Screenshot 2024-04-22 at 12 06 11 AM" src="https://github.com/imfeniljikadara/Wave-Modulation-Simulator/assets/146850675/3bf18f3a-493e-48e4-b36f-05f5120e763a">
 
 Now, after selecting modulation type and putting all the data will get the modulated waves like this:
->![Image](https://github.com/users/imfeniljikadara/projects/1/assets/146850675/c544b8d5-b97e-4da7-9e37-b156f4c53721)
+><img width="1680" alt="Screenshot 2024-04-22 at 12 14 33 AM" src="https://github.com/imfeniljikadara/Wave-Modulation-Simulator/assets/146850675/122ed24d-a7df-40df-aa9b-2036ad01f0f5">
 
 The dark mode view:
->![Image](https://github.com/users/imfeniljikadara/projects/1/assets/146850675/ca2e4203-adae-40f1-a0b2-31f73543b3ae)
+><img width="1680" alt="Screenshot 2024-04-22 at 12 21 02 AM" src="https://github.com/imfeniljikadara/Wave-Modulation-Simulator/assets/146850675/01fdcd72-ba20-4b27-b229-5d0d2848cc1c">

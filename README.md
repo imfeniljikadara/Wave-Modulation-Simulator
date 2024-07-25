@@ -1,4 +1,4 @@
-### Wave Modulation Simulator ###  
+# Wave Modulation Simulator
 
 **Description**
 
